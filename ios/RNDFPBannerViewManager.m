@@ -17,32 +17,20 @@ RCT_EXPORT_MODULE();
 
 - (UIView *)view
 {
-  return [RNDFPBannerView new];
+  return [[RNDFPBannerView alloc] init];
 }
 
-RCT_EXPORT_METHOD(loadBanner:(nonnull NSNumber *)reactTag)
-{
-    [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RNDFPBannerView *> *viewRegistry) {
-        RNDFPBannerView *view = viewRegistry[reactTag];
-        if (![view isKindOfClass:[RNDFPBannerView class]]) {
-            RCTLogError(@"Invalid view returned from registry, expecting RNDFPBannerView, got: %@", view);
-        } else {
-            [view loadBanner];
-        }
-    }];
-}
+RCT_EXPORT_VIEW_PROPERTY(bannerSize, NSString *)
+RCT_EXPORT_VIEW_PROPERTY(adUnitID, NSString *)
+RCT_EXPORT_VIEW_PROPERTY(testDeviceID, NSString *)
 
-RCT_REMAP_VIEW_PROPERTY(adSize, _bannerView.adSize, GADAdSize)
-RCT_REMAP_VIEW_PROPERTY(adUnitID, _bannerView.adUnitID, NSString)
-RCT_EXPORT_VIEW_PROPERTY(validAdSizes, NSArray)
-RCT_EXPORT_VIEW_PROPERTY(testDevices, NSArray)
-
+RCT_EXPORT_VIEW_PROPERTY(onAdmobDispatchAppEvent, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onAdViewDidDismissScreen, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onAdViewDidReceiveAd, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onAdViewWillDismissScreen, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onAdViewWillLeaveApplication, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onAdViewWillPresentScreen, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onDidFailToReceiveAdWithError, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onSizeChange, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onAppEvent, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onAdLoaded, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onAdFailedToLoad, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onAdOpened, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onAdClosed, RCTBubblingEventBlock)
-RCT_EXPORT_VIEW_PROPERTY(onAdLeftApplication, RCTBubblingEventBlock)
 
 @end

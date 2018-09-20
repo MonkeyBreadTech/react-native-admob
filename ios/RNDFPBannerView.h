@@ -10,17 +10,20 @@
 
 @interface RNDFPBannerView : RCTView <GADBannerViewDelegate, GADAdSizeDelegate, GADAppEventDelegate>
 
-@property (nonatomic, copy) NSArray *validAdSizes;
-@property (nonatomic, copy) NSArray *testDevices;
+@property (nonatomic, copy) NSString *bannerSize;
+@property (nonatomic, copy) NSString *adUnitID;
+@property (nonatomic, copy) NSString *testDeviceID;
 
 @property (nonatomic, copy) RCTBubblingEventBlock onSizeChange;
-@property (nonatomic, copy) RCTBubblingEventBlock onAppEvent;
-@property (nonatomic, copy) RCTBubblingEventBlock onAdLoaded;
-@property (nonatomic, copy) RCTBubblingEventBlock onAdFailedToLoad;
-@property (nonatomic, copy) RCTBubblingEventBlock onAdOpened;
-@property (nonatomic, copy) RCTBubblingEventBlock onAdClosed;
-@property (nonatomic, copy) RCTBubblingEventBlock onAdLeftApplication;
+@property (nonatomic, copy) RCTBubblingEventBlock onAdmobDispatchAppEvent;
+@property (nonatomic, copy) RCTBubblingEventBlock onAdViewDidReceiveAd;
+@property (nonatomic, copy) RCTBubblingEventBlock onDidFailToReceiveAdWithError;
+@property (nonatomic, copy) RCTBubblingEventBlock onAdViewWillPresentScreen;
+@property (nonatomic, copy) RCTBubblingEventBlock onAdViewWillDismissScreen;
+@property (nonatomic, copy) RCTBubblingEventBlock onAdViewDidDismissScreen;
+@property (nonatomic, copy) RCTBubblingEventBlock onAdViewWillLeaveApplication;
 
+- (GADAdSize)getAdSizeFromString:(NSString *)bannerSize;
 - (void)loadBanner;
 
 @end
