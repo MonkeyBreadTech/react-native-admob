@@ -39,7 +39,7 @@
 }
 
 - (void)loadBanner {
-  if (_adUnitID && _bannerSize && _onSizeChange && _onDidFailToReceiveAdWithError) {
+  if (_adUnitID && _bannerSize/* && _onSizeChange && _onDidFailToReceiveAdWithError*/) {
     GADAdSize size = [self getAdSizeFromString:_bannerSize];
     _bannerView = [[DFPBannerView alloc] initWithAdSize:size];
     [_bannerView setAppEventDelegate:self];
@@ -67,17 +67,17 @@
   }
 }
 
-- (void)setOnSizeChange:(EXDirectEventBlock)block
-{
-  _onSizeChange = block;
-  [self loadBanner];
-}
-
-- (void)setOnDidFailToReceiveAdWithError:(EXDirectEventBlock)block
-{
-  _onDidFailToReceiveAdWithError = block;
-  [self loadBanner];
-}
+// - (void)setOnSizeChange:(EXDirectEventBlock)block
+// {
+//   _onSizeChange = block;
+//   [self loadBanner];
+// }
+//
+// - (void)setOnDidFailToReceiveAdWithError:(EXDirectEventBlock)block
+// {
+//   _onDidFailToReceiveAdWithError = block;
+//   [self loadBanner];
+// }
 
 - (void)adView:(DFPBannerView *)banner didReceiveAppEvent:(NSString *)name withInfo:(NSString *)info {
   if (self.onAdmobDispatchAppEvent) {
